@@ -1,6 +1,6 @@
 # TMU_Security_Incidents
 ## Overview
-By collecting security incident data reported by [TMU's Community Safety and Security Website](https://www.torontomu.ca/community-safety-security/security-incidents/list-of-security-incidents/), this project aims to:
+By collecting security incident data reported by [TMU's Community Safety and Security Site](https://www.torontomu.ca/community-safety-security/security-incidents/list-of-security-incidents/), this project aims to:
 - Develop a machine learning model which will forecast incidents.
 - Provide insights which can help TMU Security plan and allocate rescources to enhance safety.
 - Dashboard all reported incidents into a interactive and customizable view.
@@ -11,24 +11,25 @@ By collecting security incident data reported by [TMU's Community Safety and Sec
 
 ## Data Cleaning & Exploration
 A subset of 32 reports are only titled 'Toronto Police Service News Release':
-- Incident type had to be extracted from the text found in incident_details.
+- Incident type had to be extracted from the text found in incident_details by keyword/phrase mapping.
 
 ![alt text](https://github.com/timothycho01/TMU_Security_Incidents/blob/main/readme_visuals/incidents_from_news_releases.png?raw=true)
 
 Location Inconsistencies:
 - Ordering:
-  - Yonge Street and Gould Street vs Gould Street and Yonge Street
+  - Yonge Street and Gould Street vs Gould Street and Yonge Street.
 
 - Renaming:
-  - TMU Image Centre vs Ryerson Image Centre
+  - TMU Image Centre vs Ryerson Image Centre.
 
 - Level of Precision:
-  - Tim Hortons at the Yonge- Dundas Square vs Yonge- Dundas Square
+  - Tim Hortons at the Yonge- Dundas Square vs Yonge- Dundas Square.
     
-- Locations were standardized:
-  - Streets of intersections ordered alphabetically
-  - Ryerson replaced with TMU
-  - Precision reduced to general building or area
+- Locations were standardized by the following:
+  - Streets of intersections ordered alphabetically.
+  - Ryerson replaced with TMU.
+  - Precision reduced to general building or area.
+  - Spelling errors corrected.
 
 ### Visuals
 ![alt text](https://github.com/timothycho01/TMU_Security_Incidents/blob/main/readme_visuals/incidents_by_location.png?raw=true)
