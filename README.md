@@ -1,7 +1,7 @@
 # TMU_Security_Incidents
 ## Overview
 By collecting security incident data reported by [TMU's Community Safety and Security Website](https://www.torontomu.ca/community-safety-security/security-incidents/list-of-security-incidents/), this project aims to:
-- Develop a machine learning model which will predict incidents.
+- Develop a machine learning model which will forecast incidents.
 - Provide insights which can help TMU Security plan and allocate rescources to enhance safety.
 - Dashboard all reported incidents into a interactive and customizable view.
 - Serve as the basis for future machine learning and NLP projects.
