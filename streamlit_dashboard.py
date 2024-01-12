@@ -248,7 +248,7 @@ def dashboard():
         st.markdown('''
         :orange[Github:] https://github.com/timothycho01/TMU_Security_Incidents
 
-        :orange[Data Last Updated:] 2024-12-31
+        :orange[Data Last Updated:] 2023-12-31
         
         :orange[Data Source:] https://www.torontomu.ca/community-safety-security/security-incidents/list-of-security-incidents/
         ''')
