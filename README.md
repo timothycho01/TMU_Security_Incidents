@@ -57,8 +57,11 @@ Location Inconsistencies:
 ### Monthly Incidents + 12 Month Forecast
 ![alt text](https://github.com/timothycho01/TMU_Security_Incidents/blob/main/readme_visuals/monthly_history_and_forecast.png?raw=true)
 
-## NLP Preprocessing / Work in Progress
-- Endcoding entities in incident_details and extract key infromation based on Part-of-speech tagging:
+## Work in Progress - NLP + K-means clustering 
+- Endcoding entities in incident_details
+  <details open>
+  <summary>Example</summary>
+
   ```
   'tmu community members': 'TMU_MEMBER',
   'tmu community member': 'TMU_MEMBER',
@@ -101,3 +104,7 @@ Location Inconsistencies:
   'paramedics': 'TORONTO_PARAMEDIC_SERVICES',
   'paramedic': 'TORONTO_PARAMEDIC_SERVICES',
   ```
+  </details>
+- Extract features from sentences based on Part-of-speech tagging in relation to entity
+- TF-IDF
+- K-means clustering
