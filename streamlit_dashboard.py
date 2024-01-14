@@ -36,14 +36,6 @@ incidents_by_month = alt.Chart(data).mark_line(point=True).encode(
     ],
 ).add_params(
     doi_interval_selection
-).transform_filter(
-    incident_selection
-).transform_filter(
-    month_wday_selection
-).transform_filter(
-    location_selection
-).transform_filter(
-    streets_selection
 ).properties(
     title='Monthly Incidents',
     width=880,
