@@ -213,7 +213,7 @@ incidents_by_loc_text = incidents_by_loc_base.encode(
 streets_chart = alt.Chart(data).mark_rect().encode(
     x=alt.X('street_x:O', title=''),
     y=alt.Y('street_y:O', title=''),
-    color=alt.condition(streets_selection, 'distinct(incident_url):Q', alt.value('lightgrey'), title=''),
+    color=alt.Color('distinct(incident_url):Q', title=''),
     tooltip=[
         alt.Tooltip('distinct(incident_url):Q', title='Reported Incidents'),
         alt.Tooltip('loi_standardized:N', title='Location of Incident'),
