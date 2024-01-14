@@ -71,7 +71,7 @@ totals = alt.Chart(data).mark_text(
     text='distinct(incident_url):Q',
 ).properties(
     title='Total Incidents',
-    width=40,
+    width=50,
 ).transform_filter(
     incident_selection
 ).transform_filter(
@@ -96,7 +96,59 @@ total_types = alt.Chart(data).mark_text(
     text='distinct(incident):Q',
 ).properties(
     title='Incident Types',
-    width=40,
+    width=50,
+).transform_filter(
+    incident_selection
+).transform_filter(
+    doi_interval_selection
+).transform_filter(
+    location_selection
+).transform_filter(
+    streets_selection
+).transform_filter(
+    month_wday_selection
+).transform_filter(
+    hour_selection
+).transform_filter(
+    month_selection
+).transform_filter(
+    year_selection
+)
+
+earliest = alt.Chart(data).mark_text(
+    fontSize=20,
+    align='center',
+).encode(
+    text='min(date_of_incident):T',
+).properties(
+    title='Earliest Incident',
+    width=70,
+).transform_filter(
+    incident_selection
+).transform_filter(
+    doi_interval_selection
+).transform_filter(
+    location_selection
+).transform_filter(
+    streets_selection
+).transform_filter(
+    month_wday_selection
+).transform_filter(
+    hour_selection
+).transform_filter(
+    month_selection
+).transform_filter(
+    year_selection
+)
+
+latest = alt.Chart(data).mark_text(
+    fontSize=20,
+    align='center',
+).encode(
+    text='max(date_of_incident):T',
+).properties(
+    title='Latest Incident',
+    width=70,
 ).transform_filter(
     incident_selection
 ).transform_filter(
@@ -352,7 +404,7 @@ streets_chart = alt.Chart(data).mark_rect().encode(
 incident_type_bar = incident_type_bar + incident_type_bar.mark_text(align='left', dx=3)
 incidents_by_loc = incidents_by_loc + incidents_by_loc_text.mark_text(align='center', dy=-6)
 
-cards = totals | total_types
+cards = totals | total_types | earliest | latest
 
 row_1 = incidents_by_month | month_wday_heatmap
 row_2 = incident_type_bar | incidents_by_loc
