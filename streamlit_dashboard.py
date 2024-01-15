@@ -475,7 +475,11 @@ dashboard_visuals = cards & row_1.resolve_scale(
 def dashboard():
     st.set_page_config(layout="wide")
     st.title('Security Incidents @ TMU')
-    with st.expander('About this dashboard:'):
+    col1, col2 = st.columns([6, 5])
+
+    with col1:
+        st.write('')
+        st.write('')
         st.markdown('''
         :orange[Github:] https://github.com/timothycho01/TMU_Security_Incidents
 
@@ -483,20 +487,29 @@ def dashboard():
         
         :orange[Data Source:] https://www.torontomu.ca/community-safety-security/security-incidents/list-of-security-incidents/
         ''')
-    with st.expander('User Interaction:', expanded=True):
-        st.markdown('''
-        - :orange[multi-select:] hold shift + click
-        - :orange[time interval:] click and drag, scroll to widen/narrow
-        - :orange[clear selections:] double-click
-        ''')
 
-    st.altair_chart(dashboard_visuals, theme=None)
+    with col2:
+        tab1, tab2 = st.tabs(["User Interaction", "Visual Demo"])
+
+        with tab1:
+            st.markdown('''
+            - :orange[multi-select:] hold shift + click
+            - :orange[time interval:] click and drag, scroll to widen/narrow
+            - :orange[clear selections:] double-click
+            ''')
+        with tab2:
+            st.image('readme_visuals/dashboard_demo.gif')
+
+    with st.expander('Dashboard:', expanded=True):
+        st.altair_chart(dashboard_visuals, theme=None)
 
     with st.expander('Map of Incidents:', expanded=False):
+        st.markdown('Note: Map is static and does not have any cross-filtering.')
         st.markdown('Hover over the points to see the location/intersection.')
         st.altair_chart(incident_map, theme=None)
 
     with st.expander('Data Table:', expanded=False):
+        st.markdown('Note: Table is static and does not have any cross-filtering.')
         cols = ['date_of_incident', 'incident', 'loi_standardized', 'incident_details', 'incident_url']
         st.data_editor(
             dashboard_data[cols],
