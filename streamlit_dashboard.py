@@ -518,6 +518,7 @@ def dashboard():
             },
             hide_index=True,
             use_container_width=True,
+            disabled=True,
         )
 
     # dashboard_visuals
