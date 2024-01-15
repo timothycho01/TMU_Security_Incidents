@@ -400,6 +400,61 @@ streets_chart = alt.Chart(data).mark_rect().encode(
     year_selection
 )
 
+data[['latitude', 'longitude']] = data['coordinates'].apply(lambda x: pd.Series(str(x).split(', ')) if x else pd.Series([0, 0]))
+
+map_select = alt.selection_interval()
+
+map_chart = alt.Chart(data).mark_circle().encode(
+    longitude='longitude:Q',
+    latitude='latitude:Q',
+    tooltip=[
+        alt.Tooltip('distinct(incident_url)', title='incidents'),
+        alt.Tooltip('loi_standardized', title='location'),
+    ]
+).properties(
+    width=700,
+    height=700
+).transform_filter(
+    (alt.datum.coordinates)
+).project(
+    "albers"
+)
+
+vis_layer = map_chart.mark_circle(size=450).encode(
+    color=alt.Color('distinct(incident_url)', title='incidents'),
+)
+
+gy_label = map_chart.mark_text(align='center', dy=-7, dx=-44, lineBreak=r'and').encode(
+    text='loi_standardized',
+).transform_filter(
+    (alt.datum.loi_standardized == 'gould street and yonge street')
+)
+
+dy_label = map_chart.mark_text(align='center', dy=-10, dx=-45, lineBreak=r'and').encode(
+    text='loi_standardized',
+).transform_filter(
+    (alt.datum.loi_standardized == 'dundas street and yonge street')
+)
+
+kh_label = map_chart.mark_text(align='center', dx=-32, dy=0).encode(
+    text='loi_standardized',
+).transform_filter(
+    (alt.datum.loi_standardized == 'kerr hall')
+)
+
+dv_label = map_chart.mark_text(align='center', dx=-45, dy=-16, lineBreak=r'and').encode(
+    text='loi_standardized',
+).transform_filter(
+    (alt.datum.loi_standardized == 'dundas street east and victoria street')
+)
+
+bg_label = map_chart.mark_text(align='center', dx=-41, dy=-12, lineBreak=r'and').encode(
+    text='loi_standardized',
+).transform_filter(
+    (alt.datum.loi_standardized == 'bond street and gould street')
+)
+
+incident_map = vis_layer + gy_label + dy_label + dv_label + bg_label + kh_label
 
 incident_type_bar = incident_type_bar + incident_type_bar.mark_text(align='left', dx=3)
 incidents_by_loc = incidents_by_loc + incidents_by_loc_text.mark_text(align='center', dy=-6)
@@ -436,6 +491,21 @@ def dashboard():
         ''')
 
     st.altair_chart(dashboard_visuals, theme=None)
+
+    with st.expander('Map of Incidents:', expanded=False):
+        st.markdown('Hover over the points to see the location/intersection.')
+        st.altair_chart(incident_map, theme=None)
+
+    with st.expander('Data Table:', expanded=False):
+        cols = ['date_of_incident', 'incident', 'loi_standardized', 'coordinates', 'incident_url']
+        st.data_editor(
+            dashboard_data[cols],
+            column_config={
+                "incident_url": st.column_config.LinkColumn("incident_url")
+            },
+            hide_index=True,
+        )
+
     # dashboard_visuals
 
 if __name__ == "__main__":
