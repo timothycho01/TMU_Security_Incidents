@@ -497,13 +497,14 @@ def dashboard():
         st.altair_chart(incident_map, theme=None)
 
     with st.expander('Data Table:', expanded=False):
-        cols = ['date_of_incident', 'incident', 'loi_standardized', 'coordinates', 'incident_url']
+        cols = ['date_of_incident', 'incident', 'loi_standardized', 'incident_details', 'incident_url']
         st.data_editor(
             dashboard_data[cols],
             column_config={
                 "incident_url": st.column_config.LinkColumn("incident_url")
             },
             hide_index=True,
+            use_container_width=True,
         )
 
     # dashboard_visuals
