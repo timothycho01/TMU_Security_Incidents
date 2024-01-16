@@ -4,7 +4,7 @@ import pandas as pd
 import altair as alt
 import ast
 
-dashboard_data = pd.read_csv('dashboard_data.csv')
+dashboard_data = pd.read_csv('dashboard/dashboard_data.csv')
 dashboard_data['extracted_streets'] = dashboard_data['extracted_streets'].apply(ast.literal_eval)
 dashboard_data['date_of_incident'] = pd.to_datetime(dashboard_data['date_of_incident'])
 
@@ -517,7 +517,7 @@ def dashboard():
             - :orange[zoom:] scroll
             ''')
 
-            with open('dashboard_heatmap.html', 'r') as f:
+            with open('dashboard/dashboard_heatmap.html', 'r') as f:
                 html_data = f.read()
 
             components.html(html_data, height=1200)
