@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import altair as alt
 import ast
@@ -500,16 +501,54 @@ def dashboard():
         with tab2:
             st.image('readme_visuals/dashboard_demo.gif')
 
-    with st.expander('Dashboard:', expanded=True):
+    st.subheader('Dashboard', anchor='dashboard')
+    with st.expander('Show/Hide:', expanded=True):
+
         st.altair_chart(dashboard_visuals, theme=None)
 
-    with st.expander('Map of Incidents:', expanded=False):
-        st.markdown('Note: Map is static and does not have any cross-filtering.')
-        st.markdown('Hover over the points to see the location/intersection.')
-        st.altair_chart(incident_map, theme=None)
+    st.subheader('Incident Maps', anchor='incident-maps')
+    with st.expander('Show/Hide:', expanded=True):
+        st.markdown('Note: Map does not have any cross-filtering.')
 
-    with st.expander('Data Table:', expanded=False):
-        st.markdown('Note: Table is static and does not have any cross-filtering.')
+        tab1, tab2, tab3 = st.tabs(["Folium Map", "Altair Map", "Unmapped Records"])
+        with tab1:
+            st.markdown('''
+            - :orange[pan:] click + drag
+            - :orange[zoom:] scroll
+            ''')
+
+            with open('dashboard_heatmap.html', 'r') as f:
+                html_data = f.read()
+
+            components.html(html_data, height=1200)
+        with tab2:
+            st.markdown('''
+            - :orange[more details:] hover over points.
+            ''')
+            st.altair_chart(incident_map, theme=None)
+
+        with tab3:
+            st.markdown('''
+            Following records excluded because:
+            - not a physical location.
+            - not an intersection (i.e., two parallel streets).
+            - ambiguous (ex: parking garage, tmu campus).
+            ''')
+            unmapped = dashboard_data[dashboard_data['coordinates'].isna()]
+            cols = ['date_of_incident', 'incident', 'loi_standardized', 'incident_details', 'incident_url']
+            st.data_editor(
+                unmapped[cols],
+                column_config={
+                    "incident_url": st.column_config.LinkColumn("incident_url")
+                },
+                hide_index=True,
+                use_container_width=True,
+                disabled=True,
+            )
+
+    st.subheader('Data Table', anchor='data-table')
+    with st.expander('Show/Hide', expanded=False):
+        st.markdown('Note: Table does not have any cross-filtering.')
         cols = ['date_of_incident', 'incident', 'loi_standardized', 'incident_details', 'incident_url']
         st.data_editor(
             dashboard_data[cols],
@@ -518,9 +557,9 @@ def dashboard():
             },
             hide_index=True,
             use_container_width=True,
+            disabled=True,
         )
 
-    # dashboard_visuals
 
 if __name__ == "__main__":
     dashboard()
