@@ -13,7 +13,10 @@ By collecting security incident data reported by [TMU's Community Safety and Sec
 
 ### Streamlit Dashboard
 https://tmu-security-incidents-dashboard.streamlit.app/
-
+<details open>
+<summary>Preview</summary>
+![alt text](https://github.com/timothycho01/TMU_Security_Incidents/blob/main/readme_visuals/dashboard.png?raw=true)
+</details>
 ![alt text](https://github.com/timothycho01/TMU_Security_Incidents/blob/main/readme_visuals/dashboard_demo.gif?raw=true)
 
 ### Monthly Forecast
