@@ -12,7 +12,7 @@ By collecting security incident data reported by [TMU's Community Safety and Sec
 ## Results
 
 ### Streamlit Dashboard
-https://tmu-security-incidents-dashboard.streamlit.app/
+https://host-tmu-security-incidents-dashboard.streamlit.app/
 
   <details open>
   <summary>Preview</summary>
